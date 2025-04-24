@@ -1,0 +1,86 @@
+import React, { useState } from 'react';
+
+interface TourCardProps {
+    id: string;
+    name: string;
+    info: string;
+    image: string;
+    price: string;
+    onRemove: (id: string) => void;
+}
+
+const TourCard: React.FC<TourCardProps> = ({ id, name, info, image, price, onRemove }) => {
+    const [showFullInfo, setShowFullInfo] = useState(false);
+
+    const toggleInfo = () => {
+        setShowFullInfo(!showFullInfo);
+    };
+
+    return (
+        <div className="tour-card" style={styles.card}>
+            <img src={image} alt={name} style={styles.image} />
+            <div style={styles.content}>
+                <h2 style={styles.name}>{name}</h2>
+                <h4 style={styles.price}>${price}</h4>
+                <p style={styles.info}>
+                    {showFullInfo ? info : `${info.substring(0, 100)}...`}
+                    <button onClick={toggleInfo} style={styles.toggleButton}>
+                        {showFullInfo ? 'Show Less' : 'Read More'}
+                    </button>
+                </p>
+                <button onClick={() => onRemove(id)} style={styles.removeButton}>
+                    Not Interested
+                </button>
+            </div>
+        </div>
+    );
+};
+
+const styles = {
+    card: {
+        border: '1px solid #ddd',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        marginBottom: '16px',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    },
+    image: {
+        width: '100%',
+        height: '200px',
+        objectFit: 'cover',
+    },
+    content: {
+        padding: '16px',
+    },
+    name: {
+        margin: '0 0 8px',
+        fontSize: '1.5rem',
+    },
+    price: {
+        margin: '0 0 16px',
+        color: '#2a9d8f',
+        fontWeight: 'bold',
+    },
+    info: {
+        marginBottom: '16px',
+        lineHeight: '1.5',
+    },
+    toggleButton: {
+        marginLeft: '8px',
+        background: 'none',
+        border: 'none',
+        color: '#007bff',
+        cursor: 'pointer',
+        textDecoration: 'underline',
+    },
+    removeButton: {
+        backgroundColor: '#e63946',
+        color: '#fff',
+        border: 'none',
+        padding: '8px 16px',
+        borderRadius: '4px',
+        cursor: 'pointer',
+    },
+};
+
+export default TourCard;
