@@ -44,7 +44,7 @@ const Tours = () => {
     );
   }
 
-  return <Gallery tours={tours} />;
+  return <Gallery tours={tours} setTours={setTours} />;
 };
 
 export default Tours;
