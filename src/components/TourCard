@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 interface TourCardProps {
-    id: string;
     name: string;
     info: string;
     image: string;
@@ -9,13 +8,7 @@ interface TourCardProps {
     onRemove: (id: string) => void;
 }
 
-const TourCard: React.FC<TourCardProps> = ({ id, name, info, image, price, onRemove }) => {
-    const [showFullInfo, setShowFullInfo] = useState(false);
-
-    const toggleInfo = () => {
-        setShowFullInfo(!showFullInfo);
-    };
-
+const TourCard: React.FC<TourCardProps> = ({ name, info, image, price }) => {
     return (
         <div className="tour-card" style={styles.card}>
             <img src={image} alt={name} style={styles.image} />
@@ -53,25 +46,10 @@ const styles = {
         padding: '16px',
     },
     name: {
-        margin: '0 0 8px',
         fontSize: '1.5rem',
     },
     price: {
         margin: '0 0 16px',
-        color: '#2a9d8f',
-        fontWeight: 'bold',
-    },
-    info: {
-        marginBottom: '16px',
-        lineHeight: '1.5',
-    },
-    toggleButton: {
-        marginLeft: '8px',
-        background: 'none',
-        border: 'none',
-        color: '#007bff',
-        cursor: 'pointer',
-        textDecoration: 'underline',
     },
     removeButton: {
         backgroundColor: '#e63946',
